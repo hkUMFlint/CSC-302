@@ -1,0 +1,50 @@
+
+R version 4.4.3 (2025-02-28 ucrt) -- "Trophy Case"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> df1=data.frame(Name=c('James','Paul','Richards','Marico','Samantha','Ravi','Raghu','Richards','George','Ema','Samantha','Catherine'),
++ State=c('Alaska','California','Texas','North Carolina','California','Texas',
++ 'Alaska','Texas','North Carolina','Alaska','California','Texas'),
++ Sales=c(14,24,31,12,13,7,9,31,18,16,18,14))
+> aggregate(df1$Sales, by=list(df1$State), FUN=sum)
+         Group.1  x
+1         Alaska 39
+2     California 55
+3 North Carolina 30
+4          Texas 83
+> library(dplyr)
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+> df1 %>% group_by(State) %>% summarise(sum_sales = sum(Sales))
+# A tibble: 4 × 2
+  State          sum_sales
+  <chr>              <dbl>
+1 Alaska                39
+2 California            55
+3 North Carolina        30
+4 Texas                 83
+> 
